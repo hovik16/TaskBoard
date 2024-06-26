@@ -1,0 +1,56 @@
+:root {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+.template, .hidden {
+  display: none;
+}
+
+input, button, textarea {
+  font-size: inherit; /* Use the same font size as normal text */
+  font-family: inherit; /* Use the same font family as the rest of the page */
+}
+
+.card.moving {
+  border: 2px solid black;
+}
+
+.editDescription {
+  width: 100%; /* Expand to full width of the page */
+  height: 5em; /* Set height to 5 times the font size (1em) */
+  background-color: inherit; /* Use the same background color as the rest of the card */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.description {
+  white-space: pre-wrap; /* Preserve whitespace and wrap text */
+}
+
+.card .buttons button {
+  background-color: inherit; /* Use the card's background color */
+  border: none; /* Remove border */
+  cursor: pointer; /* Change cursor to pointer hand */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.card .buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.25); /* Translucent background color on hover */
+}
+
+.moveButton {
+  font-size: small; /* Use a small font size */
+  color: gray; /* Set text color to gray */
+  cursor: pointer; /* Use the pointer cursor */
+  border: none; /* Remove border */
+  background-color: transparent; /* Transparent background */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for background color and text color */
+}
+
+.moveButton:hover {
+  background-color: #e0e0e0; /* Background color on hover */
+  color: black; /* Text color on hover */
+}

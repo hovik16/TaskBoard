@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Task Board | Assignment 3</title>
+
+    <!-- This line provides automatic page and style reloading when files change -->
+    <script type="module" src="/lib/client/updater.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <script type="module" src="app.js"></script>
+    <script type="module" src="index.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Task Board</h1>
+
+      <form id="addCard">
+        <input type="text" name="title" id="cardTitle" placeholder="Title" required>
+        <input type="text" name="color" id="cardColor" placeholder="Color">
+        <button type="submit" id="addButton">Add</button>
+        <button type="button" class="lightDarkMode" id="lightDark"><img src="icons/light-mode.svg" alt="light-dark"></button>
+      </form>
+    </header>
+
+    <main id="board">
+      <section class="column" id="todo">
+        <h2 class="columnTitle">To Do</h2>
+      </section>
+
+      <section class="column" id="doing">
+        <h2 class="columnTitle">Doing</h2>
+      </section>
+
+      <section class="column" id="done">
+        <h2 class="columnTitle">Done</h2>
+      </section>
+    </main>
+
+    <!-- Template card to be cloned in JavaScript -->
+    <article class="template card">
+      <h3 class="title">[TEMPLATE]</h3>
+      <p class="description">You should never see this text.</p>
+      <textarea name="editDescriptionButton" class="editDescription hidden"></textarea>
+      <div class="buttons">
+        <button class="hidden edit"><img src="icons/edit.svg" alt="Edit"></button>
+        <button class="hidden startMove"><img src="icons/move.svg" alt="Move"></button>
+        <button class="hidden delete"><img src="icons/delete.svg" alt="Delete"></button>
+      </div>
+    </article>
+
+    <script>
+      // TODO: Save light/dark in storage
+      document.addEventListener('DOMContentLoaded', (event) => {
+
+        function setTheme(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+
+          const img = document.querySelector('img[alt="light-dark"]');
+          if(theme == "light") {
+            img.src = "icons/light-mode.svg";
+          } else {
+            img.src = "icons/dark-mode.svg";
+          }
+
+          localStorage.setItem("theme", theme);
+        }
+
+        function detectPreferredTheme() {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme("dark");
+          } else {
+            setTheme("light");
+          }
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+          if (event.matches) {
+            setTheme("dark");
+          } else {
+            setTheme("light");
+          }
+        });
+
+        // localStorage.removeItem("theme");
+        const savedTheme = localStorage.getItem('theme');
+        if(savedTheme) {
+          setTheme(savedTheme)
+        } else {
+          detectPreferredTheme();
+        }
+
+        const lightDarkButton = document.getElementById('lightDark');
+        lightDarkButton.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+
+          if(currentTheme == "light") {
+            setTheme("dark");
+          } else {
+            setTheme("light");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
